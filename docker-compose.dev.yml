@@ -4,9 +4,10 @@ services:
       context: .
     environment:
       NODE_ENV: development
+      DB_FILENAME: "/kutt/db/data.sqlite"
     volumes:
       - ./custom:/kutt/custom  # ✅ bind-mount your real local folder
-      - db_data_sqlite:/var/lib/kutt
+      - ./kutt-sqlite-data:/kutt/db # store the db file in real local folder
     ports:
       - 3000:3000  # Internal, proxied via Nginx
     command: >
@@ -16,8 +17,11 @@ services:
       "
     env_file:
       - .dev.env
+    restart: unless-stopped
+
   caddy:
     image: caddy:alpine
+    restart: unless-stopped
     depends_on:
       server:
         condition: service_started

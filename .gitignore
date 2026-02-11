@@ -1,5 +1,6 @@
 .env
 .vscode/
+.dev.env
 logs
 client/.next/
 node_modules/
@@ -14,3 +15,5 @@ docs/api/static
 **/.DS_Store
 db/*
 !db/.gitkeep
+kutt-sqlite-data
+
