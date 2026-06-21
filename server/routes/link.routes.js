@@ -15,7 +15,7 @@ router.get(
   "/",
   locals.viewTemplate("partials/links/table"),
   asyncHandler(auth.apikey),
-  asyncHandler(auth.jwt),
+  asyncHandler(auth.jwtLoose),
   helpers.parseQuery,
   asyncHandler(link.get)
 );

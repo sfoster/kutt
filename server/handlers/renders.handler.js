@@ -9,10 +9,9 @@ const env = require("../env");
 **/
 
 async function homepage(req, res) {
-  if (env.DISALLOW_ANONYMOUS_LINKS && !req.user) {
-    res.redirect("/login");
-    return;
-  }
+  // Anonymous visitors can still view the homepage (recent links + a login
+  // call-to-action). The link creation form itself is gated in the template
+  // on whether a user is present.
   res.render("homepage", {
     title: "Free modern URL shortener",
   });

@@ -32,6 +32,9 @@ async function get(req, res) {
       total,
       limit,
       skip,
+      // used by the row template to decide whether to render edit/delete
+      // actions — anonymous visitors get a read-only list
+      user: req.user,
       links: data.map(utils.sanitize.link_html),
     })
     return;
@@ -147,8 +150,10 @@ async function create(req, res) {
     res.setHeader("HX-Trigger", "reloadMainTable");
     const shortURL = utils.getShortURL(link.address, link.domain);
     return res.render("partials/shortener", {
-      link: shortURL.link, 
+      link: shortURL.link,
       url: shortURL.url,
+      // keep the form (not the login CTA) after a successful create
+      user: req.user,
     });
   }
   

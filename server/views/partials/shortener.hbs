@@ -24,8 +24,25 @@
         <h1>Cut your links <span>shorter</span>.</h1>
     {{/unless}}
   </div>
-  <form 
-    id="shortener-form" 
+  {{#unless user}}
+    <div id="login-cta">
+      {{#unless disallow_login_form}}
+        <a class="button primary" href="/login" title="Log in or sign up">
+          <span>{{> icons/login}}</span>
+          Log in to create links
+        </a>
+      {{/unless}}
+      {{#if oidc_enabled}}
+        <a class="button secondary" href="/login/oidc" title="Login with eugenemakerspace.com Google workspace account">
+          <span>{{> icons/key}}</span>
+          SSO Log in
+        </a>
+      {{/if}}
+    </div>
+  {{/unless}}
+  {{#if user}}
+  <form
+    id="shortener-form"
     hx-post="/api/links" 
     hx-trigger="submit queue:none" 
     hx-target="closest main" 
@@ -135,4 +152,5 @@
       </div>
     </section>
   </form>
+  {{/if}}
 </main>

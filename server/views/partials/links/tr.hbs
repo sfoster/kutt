@@ -35,7 +35,11 @@
   <td class="views">
     {{visit_count}}
   </td>
+  {{#if @root.user}}
     {{> links/actions}}
+  {{else}}
+    <td class="actions"></td>
+  {{/if}}
 </tr>
 <tr class="edit">
   <td class="loading">
