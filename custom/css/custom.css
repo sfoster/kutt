@@ -31,3 +31,12 @@ a.button.action, button.action {
   height: 2rem;
   box-shadow: 0 2px 1px var(--button-action-shadow-color);
 }
+
+summary > h2 {
+  display: inline-block;
+}
+
+#login-cta {
+  display: flex;
+  gap: 1em;
+}

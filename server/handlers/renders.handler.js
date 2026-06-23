@@ -14,6 +14,8 @@ async function homepage(req, res) {
   // on whether a user is present.
   res.render("homepage", {
     title: "Free modern URL shortener",
+    // keep the anonymous public homepage (recent links) out of search indexes
+    noindex: !req.user,
   });
 }
 

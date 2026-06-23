@@ -1,19 +1,26 @@
 <section id="main-table-wrapper">
-  <h2>Recent shortened links.</h2>
-  <table 
+  {{!-- For anonymous visitors the table is collapsed and its data isn't
+        fetched until the <details> is opened, so the link URLs aren't present
+        in the initial HTML for bots/scrapers to crawl. Logged-in users keep
+        the table auto-loading on page load. --}}
+  
+  <details class="recent-links-toggle">
+    <summary>
+      <h2>Recent shortened links.</h2>
+    </summary>
+  <table
     hx-get="/api/links"
     hx-target="tbody"
-    hx-swap="outerHTML" 
+    hx-swap="outerHTML"
     hx-select="tbody"
     hx-disinherit="*"
     hx-include=".links-controls"
     hx-params="not total"
     hx-sync="this:replace"
-    hx-select-oob="#total" 
-    hx-trigger="
-      load once, 
-      reloadMainTable from:body, 
-      click delay:100ms from:button.nav, 
+    hx-select-oob="#total"
+    hx-trigger="{{#if user}}load once{{else}}toggle from:closest details once{{/if}},
+      reloadMainTable from:body,
+      click delay:100ms from:button.nav,
       input changed delay:500ms from:[name='search'],
     "
     hx-on:htmx:after-on-load="updateLinksNav()"
@@ -22,5 +29,6 @@
     {{> links/tbody}}
     {{> links/tfoot}}
   </table>
+  </details>
   {{> links/dialog/frame}}
 </section>
