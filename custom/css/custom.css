@@ -66,3 +66,7 @@ summary > h2 {
 #main-table-wrapper {
   margin-block-start: 5rem;
 }
+
+#main-table-wrapper table tfoot tr.controls {
+  justify-content: flex-start;
+}
